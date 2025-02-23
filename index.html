@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    
+    <!-- Adding Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #3498db; /* Background color */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        #loadingScreen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .loading-text {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* Progress Bar Styles */
+        .progress-bar {
+            width: 80%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: #FF5733; /* Progress color */
+            border-radius: 10px;
+        }
+
+        /* Fun Message Styles */
+        .progress-message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-text">Hey Krati, Hang tight...</div>
+
+        <!-- Animated Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <!-- Fun Message -->
+        <div class="progress-message">Loading, almost there...</div>
+    </div>
+
+    <script>
+        function startProgressBar() {
+            var progressBar = document.querySelector(".progress");
+            var progressMessage = document.querySelector(".progress-message");
+
+            // Fun messages to update during the progress
+            var messages = [
+                "Hang tight... 💪",
+                "Almost there... 🚀",
+                "You're doing great! 😄",
+                "Loading the magic... ✨",
+                "Final touches... 🔥",
+                "And... Done! 🎉"
+            ];
+
+            var width = 0;
+            var messageIndex = 0;
+
+            var interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval); // Stop when the progress bar is full
+                    redirectToMainPage(); // Call the function to redirect after progress is done
+                } else {
+                    width++;
+                    progressBar.style.width = width + "%"; // Update progress bar width
+
+                    // Change the fun message as the bar fills
+                    if (width % 20 === 0 && messageIndex < messages.length) {
+                        progressMessage.innerHTML = messages[messageIndex];
+                        messageIndex++;
+                    }
+                }
+            }, 50); // Interval time for updating the progress bar (50ms)
+        }
+
+        function redirectToMainPage() {
+            // Redirect to the main page after the progress bar is complete
+            window.location.href = "final/loading.html"; // Replace with your actual URL
+        }
+
+        // Start the progress bar animation once the page is loaded
+        window.onload = function() {
+            startProgressBar();
+        };
+    </script>
+
+</body>
+</html>
